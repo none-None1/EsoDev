@@ -16,7 +16,7 @@ File
 * Recent files
 * Clear history
 * Exit
-* 
+
 Edit
 * Copy
 * Paste
