@@ -15,9 +15,10 @@ from PySide2.QtWidgets import *
 from extensions import extensions
 from ui_about import Ui_MainWindow as mw
 from ui_keyboard_shortcuts import Ui_MainWindow as sc
-from subprocess import run,PIPE
+from subprocess import run, PIPE
 import html, json
 from extinstaller import install, uninstall
+
 
 class Ui_MainWindow(object):
     fn = "Untitled"
@@ -46,7 +47,7 @@ class Ui_MainWindow(object):
                 f.write(self.code.toPlainText())
             while fn in self.recent:
                 self.recent.remove(fn)
-            self.recent.insert(0,fn) # Insert at the front
+            self.recent.insert(0, fn)  # Insert at the front
         with open(self.fn, "w", encoding="utf-8") as f:
             f.write(self.code.toPlainText())
         self.saved = True
@@ -67,7 +68,7 @@ class Ui_MainWindow(object):
         self.lang = self.recongnize_language(fn)
         while fn in self.recent:
             self.recent.remove(fn)
-        self.recent.insert(0,fn)
+        self.recent.insert(0, fn)
         with open(fn, "w", encoding="utf-8") as f:
             f.write(self.code.toPlainText())
         self.fn = fn
@@ -134,7 +135,7 @@ class Ui_MainWindow(object):
             self.saved = True
             while fn in self.recent:
                 self.recent.remove(fn)
-            self.recent.insert(0,fn)
+            self.recent.insert(0, fn)
             with open(fn, "r", encoding="utf-8", errors="ignore") as f:
                 self.text = f.read()
                 self.code.setText(self.text)
@@ -213,7 +214,10 @@ class Ui_MainWindow(object):
             + extensions[self.lang]["name"]
             + '" pauser.exe bin\\'
             + extensions[self.lang]["cmd"].replace("%1", self.fn),
-            shell=True,stdout=PIPE,stderr=PIPE,stdin=PIPE
+            shell=True,
+            stdout=PIPE,
+            stderr=PIPE,
+            stdin=PIPE,
         )
 
     @Slot()
@@ -338,36 +342,58 @@ class Ui_MainWindow(object):
                     self.choice.currentText()
                 )
             ]
-            if QMessageBox.question(self.MainWindow,'Confirm','Uninstallation of an extension has NO UNDO!\nAre you sure you still want to uninstall it?')==QMessageBox.No:
+            if (
+                QMessageBox.question(
+                    self.MainWindow,
+                    "Confirm",
+                    "Uninstallation of an extension has NO UNDO!\nAre you sure you still want to uninstall it?",
+                )
+                == QMessageBox.No
+            ):
                 return
-            response=uninstall(to_be_uninstalled)
-            if response == 'Uninstallation was successful':
-                QMessageBox.information(self.MainWindow, 'Success',
-                                        f'Successfully uninstalled the extension "{self.choice.currentText()}", now please restart EsoDev to apply your changes')
+            response = uninstall(to_be_uninstalled)
+            if response == "Uninstallation was successful":
+                QMessageBox.information(
+                    self.MainWindow,
+                    "Success",
+                    f'Successfully uninstalled the extension "{self.choice.currentText()}", now please restart EsoDev to apply your changes',
+                )
             else:
-                QMessageBox.critical(self.MainWindow, 'Error', response)
+                QMessageBox.critical(self.MainWindow, "Error", response)
+
         self.dlg.accepted.connect(func)
         self.dlg.show()
+
     @Slot()
     def install(self):
-        fn,_=QFileDialog.getOpenFileName(self.MainWindow,'Choose an extension zip file to install','','Zip files (*.zip);;All files (*.*)')
-        response=install(fn,self.version)
-        if isinstance(response,tuple):
-            QMessageBox.information(self.MainWindow,'Success',f'Successfully installed the extension "{response[-1]}", now please restart EsoDev to apply your changes')
+        fn, _ = QFileDialog.getOpenFileName(
+            self.MainWindow,
+            "Choose an extension zip file to install",
+            "",
+            "Zip files (*.zip);;All files (*.*)",
+        )
+        response = install(fn, self.version)
+        if isinstance(response, tuple):
+            QMessageBox.information(
+                self.MainWindow,
+                "Success",
+                f'Successfully installed the extension "{response[-1]}", now please restart EsoDev to apply your changes',
+            )
         else:
-            QMessageBox.critical(self.MainWindow,'Error',response)
-    def create_opener(self,fn):
+            QMessageBox.critical(self.MainWindow, "Error", response)
+
+    def create_opener(self, fn):
         def wrapper():
             self.lang = self.recongnize_language(fn)
             if fn:
                 if (
-                        not self.saved
-                        and QMessageBox.question(
-                    self.MainWindow,
-                    "Confirm",
-                    "Your file is not saved, save your file?",
-                )
-                        == QMessageBox.Yes
+                    not self.saved
+                    and QMessageBox.question(
+                        self.MainWindow,
+                        "Confirm",
+                        "Your file is not saved, save your file?",
+                    )
+                    == QMessageBox.Yes
                 ):
                     self.save()
                 self.opened = True
@@ -375,37 +401,57 @@ class Ui_MainWindow(object):
                 self.saved = True
                 while fn in self.recent:
                     self.recent.remove(fn)
-                self.recent.insert(0,fn)
+                self.recent.insert(0, fn)
                 with open(fn, "r", encoding="utf-8", errors="ignore") as f:
                     self.text = f.read()
                     self.code.setText(self.text)
                 self.fn = fn
                 self.MainWindow.setWindowTitle(
-                    QCoreApplication.translate("MainWindow", self.fn + " - EsoDev", None)
+                    QCoreApplication.translate(
+                        "MainWindow", self.fn + " - EsoDev", None
+                    )
                 )
+
         return wrapper
+
     def update_recent(self):
         for i in self.recent:
             if os.path.exists(i):
-                a=QAction(self.MainWindow)
+                a = QAction(self.MainWindow)
                 a.triggered.connect(self.create_opener(i))
                 a.setText(i)
                 self.menuRecent.addAction(a)
+
     @Slot()
     def clear(self):
-        self.recent=[]
-        QMessageBox.information(self.MainWindow,'Clear success','Successfully cleared the history, now please restart EsoDev to save your changes')
+        self.recent = []
+        QMessageBox.information(
+            self.MainWindow,
+            "Clear success",
+            "Successfully cleared the history, now please restart EsoDev to save your changes",
+        )
+
     @Slot()
     def reset(self):
-        if QMessageBox.question(self.MainWindow,'Confirm','Resetting EsoDev will remove all your extensions, your history and reset all options!\nAre you sure you still want to reset?')==QMessageBox.No:
+        if (
+            QMessageBox.question(
+                self.MainWindow,
+                "Confirm",
+                "Resetting EsoDev will remove all your extensions, your history and reset all options!\nAre you sure you still want to reset?",
+            )
+            == QMessageBox.No
+        ):
             return
         for i in extensions.keys():
-            uninstall(i) # Delete extensions
-        self.syntaxhighlight=True
-        self.defaultlang='brainfuck'
-        self.recent=[]
-        QMessageBox.information(self.MainWindow,'Reset success','Reset was successful, press OK to quit.')
+            uninstall(i)  # Delete extensions
+        self.syntaxhighlight = True
+        self.defaultlang = "brainfuck"
+        self.recent = []
+        QMessageBox.information(
+            self.MainWindow, "Reset success", "Reset was successful, press OK to quit."
+        )
         self.MainWindow.close()
+
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName("MainWindow")
@@ -453,9 +499,9 @@ class Ui_MainWindow(object):
         self.actionInstall.setObjectName("actionInstall")
         self.actionUninstall = QAction(MainWindow)
         self.actionUninstall.setObjectName("actionUninstall")
-        self.actionClear=QAction(MainWindow)
+        self.actionClear = QAction(MainWindow)
         self.actionClear.setObjectName("actionClear")
-        self.actionReset=QAction(MainWindow)
+        self.actionReset = QAction(MainWindow)
         self.actionReset.setObjectName("actionReset")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -474,11 +520,11 @@ class Ui_MainWindow(object):
         self.menuExecution.setObjectName("menuExecution")
         self.menuOptions = QMenu(self.menubar)
         self.menuOptions.setObjectName("menuOptions")
-        self.menuExtensions=QMenu(self.menubar)
+        self.menuExtensions = QMenu(self.menubar)
         self.menuExtensions.setObjectName("menuExtensions")
         self.menuHelp = QMenu(self.menubar)
         self.menuHelp.setObjectName("menuHelp")
-        self.menuRecent=QMenu(self.menuFile)
+        self.menuRecent = QMenu(self.menuFile)
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -527,7 +573,7 @@ class Ui_MainWindow(object):
                 )  # If the language is chosen to be the default by the user, then put it in the top of the list
             else:
                 self.filext.append(f"{j['name']} ({j['filext']})")
-        self.recent=conf['recent']
+        self.recent = conf["recent"]
         self.filext.append("All files (*.*)")
         self.filext = ";;".join(self.filext)
         # File
@@ -549,6 +595,8 @@ class Ui_MainWindow(object):
         op.activated.connect(self.open)
         quit = QShortcut(QKeySequence("Ctrl+Q"), MainWindow)
         quit.activated.connect(self.quit)
+        quit = QShortcut(QKeySequence("Ctrl+R"), MainWindow)
+        quit.activated.connect(self.run)
         self.code.textChanged.connect(self.change)
         self.code.cursorPositionChanged.connect(self.cchange)
         # Edit
@@ -575,6 +623,7 @@ class Ui_MainWindow(object):
         self.cursorpos = cursor.position()
         QMetaObject.connectSlotsByName(MainWindow)
         self.update_recent()
+
     # setupUi
 
     def retranslateUi(self, MainWindow):
@@ -617,11 +666,17 @@ class Ui_MainWindow(object):
         self.actionKeyboard_Shortcuts.setText(
             QCoreApplication.translate("MainWindow", "Keyboard Shortcuts", None)
         )
-        self.actionReset.setText(QCoreApplication.translate("MainWindow","Reset and quit",None))
+        self.actionReset.setText(
+            QCoreApplication.translate("MainWindow", "Reset and quit", None)
+        )
         self.actionUndo.setText(QCoreApplication.translate("MainWindow", "Undo", None))
         self.actionRedo.setText(QCoreApplication.translate("MainWindow", "Redo", None))
-        self.actionInstall.setText(QCoreApplication.translate("MainWindow", "Install", None))
-        self.actionUninstall.setText(QCoreApplication.translate("MainWindow", "Uninstall", None))
+        self.actionInstall.setText(
+            QCoreApplication.translate("MainWindow", "Install", None)
+        )
+        self.actionUninstall.setText(
+            QCoreApplication.translate("MainWindow", "Uninstall", None)
+        )
         self.menuFile.setTitle(QCoreApplication.translate("MainWindow", "File", None))
         self.menuEdit.setTitle(QCoreApplication.translate("MainWindow", "Edit", None))
         self.menuExecution.setTitle(
@@ -630,7 +685,9 @@ class Ui_MainWindow(object):
         self.menuOptions.setTitle(
             QCoreApplication.translate("MainWindow", "Options", None)
         )
-        self.menuExtensions.setTitle(QCoreApplication.translate("MainWindow","Extensions",None))
+        self.menuExtensions.setTitle(
+            QCoreApplication.translate("MainWindow", "Extensions", None)
+        )
         self.menuHelp.setTitle(QCoreApplication.translate("MainWindow", "Help", None))
 
     # retranslateUi

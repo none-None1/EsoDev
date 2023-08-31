@@ -50,7 +50,7 @@ def install(extpath, esodev_version):
             json.dump(binaries, f)
     except BaseException as e:
         return "Internal error: " + str(e)
-    return ("Installation was successful",module)
+    return ("Installation was successful", module)
 
 
 def uninstall(extname):
