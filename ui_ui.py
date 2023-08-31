@@ -29,7 +29,7 @@ class Ui_MainWindow(object):
     highlighted = False
     text = ""
     filext = []
-    version = "1.0.0"
+    version = "1.0.1"
 
     @Slot()
     def save(self):
@@ -100,13 +100,15 @@ class Ui_MainWindow(object):
             == QMessageBox.Yes
         ):
             self.save()
-        self.fn = "Untitled.b"
+        self.fn = "Untitled"
         self.newfile = True
         self.code.clear()
 
     def recongnize_language(
         self, fn
     ):  # Automatically recognize the language through file extension
+        if not self.enable_reco:
+            return self.defaultlang # If the user disabled language guessing then just return the default language
         ext = os.path.splitext(fn)[-1]
         for i, j in extensions.items():
             if ext in [k.replace("*", "") for k in j["filext"].split()]:
@@ -233,6 +235,12 @@ class Ui_MainWindow(object):
         self.choice.setGeometry(QRect(120, 60, 271, 41))
         self.choice.addItems([i["name"] for i in extensions.values()])
         self.choice.setCurrentText(extensions[self.lang]["name"])
+        self.checkbox=QCheckBox(self.dlg)
+        self.checkbox.setGeometry(QRect(105,105,300,50))
+        self.checkbox.setText("Guess language\nfrom file name")
+        self.checkbox.setCheckState(
+            Qt.CheckState.Checked if self.enable_reco else Qt.CheckState.Unchecked
+        )
         self.okbtn = QPushButton(self.dlg)
         self.okbtn.setGeometry(QRect(130, 190, 100, 40))
         self.cancelbtn = QPushButton(self.dlg)
@@ -248,7 +256,8 @@ class Ui_MainWindow(object):
                     self.choice.currentText()
                 )
             ]
-
+            self.curlang.setText(f'Current language: {extensions[self.lang]["name"]}')
+            self.enable_reco=self.checkbox.isChecked()
         self.dlg.accepted.connect(func)
         self.dlg.show()
 
@@ -326,7 +335,6 @@ class Ui_MainWindow(object):
         self.choice = QComboBox(self.dlg)
         self.choice.setGeometry(QRect(120, 60, 271, 41))
         self.choice.addItems([i["name"] for i in extensions.values()])
-        self.choice.setCurrentText(extensions[self.lang]["name"])
         self.okbtn = QPushButton(self.dlg)
         self.okbtn.setGeometry(QRect(130, 190, 100, 40))
         self.cancelbtn = QPushButton(self.dlg)
@@ -447,6 +455,7 @@ class Ui_MainWindow(object):
         self.syntaxhighlight = True
         self.defaultlang = "brainfuck"
         self.recent = []
+        self.enable_reco = True
         QMessageBox.information(
             self.MainWindow, "Reset success", "Reset was successful, press OK to quit."
         )
@@ -566,6 +575,11 @@ class Ui_MainWindow(object):
         self.syntaxhighlight = conf["SyntaxHighlighting"]
         self.lang = conf["DefaultLang"]
         self.defaultlang = self.lang
+        self.curlang = QLabel(self.MainWindow)
+        self.curlang.setGeometry(QRect(0, 741, 934, 49))
+        self.curlang.setText(f'Current language: {extensions[self.lang]["name"]}')
+        self.curlang.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
+        self.enable_reco = conf['reco']
         for i, j in extensions.items():
             if i == self.defaultlang:
                 self.filext.insert(

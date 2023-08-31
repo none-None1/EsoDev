@@ -23,6 +23,7 @@ with open("conf.json", "w") as f:  # Store JSON file after program terminates
             "DefaultLang": ui.defaultlang,
             "SyntaxHighlighting": ui.syntaxhighlight,
             "recent": ui.recent,
+            "reco": ui.enable_reco
         },
         f,
     )

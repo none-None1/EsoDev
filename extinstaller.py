@@ -20,6 +20,7 @@ def install(extpath, esodev_version):
             return 'entry file does not contain the key "module"'
         module = entry["module"]
         binaries = entry["binaries"] if ("binaries" in entry) else []
+        directories = entry['directorys'] if ('directories' in entry) else []
         if list(map(int, version.split("."))) > list(
             map(int, esodev_version.split("."))
         ):
@@ -36,6 +37,11 @@ def install(extpath, esodev_version):
         if module == "list":
             return 'It is not allowed to install a module with the name "list"'
         zip.extract(module + ".py", f"extensions")
+        for i in directories:
+            try:
+                os.mkdir(i)
+            except:
+                return f"Could not create directory {i}"
         for i in binaries:
             try:
                 zip.extract(i, f"bin")
@@ -47,7 +53,7 @@ def install(extpath, esodev_version):
         with open("extensions\\list.json", "w", encoding="utf-8") as f:
             json.dump(extensions, f)
         with open(f"extensions\\{module}.json", "w", encoding="utf-8") as f:
-            json.dump(binaries, f)
+            json.dump(binaries+directories, f)
     except BaseException as e:
         return "Internal error: " + str(e)
     return ("Installation was successful", module)
@@ -68,8 +74,18 @@ def uninstall(extname):
         os.remove(f"extensions\\{extname}.py")
         with open(f"extensions\\{extname}.json", "r", encoding="utf-8") as f:
             binaries = json.load(f)
+        files=[]
+        dirs=[]
         for i in binaries:
-            os.remove(os.path.join("bin", i))
+            if os.path.isfile(os.path.join("bin", i)):
+                files.append(os.path.join("bin", i))
+            else:
+                dirs.append(os.path.join("bin",i))
+        for i in files:
+            os.remove(i)
+        dirs.reverse()
+        for i in dirs:
+            os.rmdir(i)
         os.remove(f"extensions\\{extname}.json")
         return "Uninstallation was successful"
     except BaseException as e:

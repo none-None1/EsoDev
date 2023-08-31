@@ -7,6 +7,14 @@ Initially, it has extensions pre-installed for [brainfuck](https://esolangs.org/
 
 However, client-side users can develop there own extensions for other esolangs. To build an extension, you need Python plus an interpreter of the esolang as a Windows executable. The Windows executable is usually build using C/C++, but it is also obviously possible to build it via Python, C&#35;, Rust, and other languages. Finally you pack all the files together into a zip file, which is the extension file. Extension files are to be smaller than 2 GiB.
 
+## Changelog
+* 1.0.0
+  * First version
+* 1.0.1
+  * Minor bugfixes
+  * Added support for enabling/disabling language guessing
+  * Added footer showing current language
+  * Added support for directories in extensions
 ## Menus
 File
 * New
