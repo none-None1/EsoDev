@@ -51,8 +51,8 @@ There is a bug: If you enable syntax highlighting, you can't use undo and redo. 
 
 ## Note for anyone who would like to build the project
 To build the project, you need: PySide2, PyInstaller, and a C++ compiler.
-1. Copy `ui_about.py`, `ui_keyboard_shortcuts.py`, `ui_ui.py`, `main.py`, `img_rc.py` and `extinstaller.py` to a separate folder (do **not** copy other files yet), say you copied it to `D:\test`.
-2. Run `pyinstaller -D -w main.py -n "EsoDev --hidden-import runpy -i EsoDev.ico` in `D:\test` (you have to convert EsoDev.png to a .ico format first).
+1. Copy `EsoDev.ico`, `ui_about.py`, `ui_keyboard_shortcuts.py`, `ui_ui.py`, `main.py`, `img_rc.py` and `extinstaller.py` to a separate folder (do **not** copy other files yet), say you copied it to `D:\test`.
+2. Run `pyinstaller -D -w main.py -n "EsoDev --hidden-import runpy -i EsoDev.ico` in `D:\test`.
 3. A folder `D:\test\dist\EsoDev\` will be created. Copy the folders `extensions` and `examples`, and the files `EsoDev.png` and `conf.json` to that folder.
 4. Use your favorite C++ compiler to compile Pauser.cpp and copy the resulting `Pauser.exe` to `D:\test\dist\EsoDev\`. Then compile all the C++ files in the `bin` directory and copy the resulting executables to `D:\test\dist\EsoDev\bin` (you have to manually create that directory)
 After the steps 1~4, the directory tree of the folder `D:\test\dist\EsoDev` should be like this:
