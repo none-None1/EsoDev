@@ -5,7 +5,7 @@ EsoDev is an IDE of esoteric languages (esolangs). It's written in Python. It su
 
 Initially, it has extensions pre-installed for [brainfuck](https://esolangs.org/wiki/Brainfuck), [Random Brainfuck](https://esolangs.org/wiki/Random_Brainfuck), [Deadfish](https://esolangs.org/wiki/Deadfish) and [Weeeeeeeeeeeeeeeeeeeeeeeeeeeeee](https://esolangs.org/wiki/Weeeeeeeeeeeeeeeeeeeeeeeeeeeeee), these extensions cannot be uninstalled by the user unless deleted manually.
 
-However, client-side users can develop there own extensions for other esolangs. To build an extension, you need Python plus an interpreter of the esolang as a Windows executable. The Windows executable is usually build using C/C++, but it is also obviously possible to build it via Python, C&#35;, Rust, and other languages. Finally you pack all the files together into a zip file, which is the extensio file. Extension files are to be smaller than 2 GiB.
+However, client-side users can develop there own extensions for other esolangs. To build an extension, you need Python plus an interpreter of the esolang as a Windows executable. The Windows executable is usually build using C/C++, but it is also obviously possible to build it via Python, C&#35;, Rust, and other languages. Finally you pack all the files together into a zip file, which is the extension file. Extension files are to be smaller than 2 GiB.
 
 ## Menus
 File
@@ -54,7 +54,7 @@ To build the project, you need: PySide2, PyInstaller, and a C++ compiler.
 1. Copy `ui_about.py`, `ui_keyboard_shortcuts.py`, `ui_ui.py`, `main.py`, `img_rc.py` and `extinstaller.py` to a separate folder (do **not** copy other files yet), say you copied it to `D:\test`.
 2. Run `pyinstaller -D -w main.py -n "EsoDev --hidden-import runpy` in `D:\test`.
 3. A folder `D:\test\dist\EsoDev\` will be created. Copy the folders `extensions` and `examples`, and the files `EsoDev.png` and `conf.json` to that folder.
-4. Use your favorite C++ compiler to compile Pauser.cpp and copy the resulting `Pauser.exe` to `D:\test\dist\EsoDev\`. Then compile all the C++ files in the `bin` directory and copy the resulting executables to `D:\test\dist\EsoDev\bin` (you have to create that directory)
+4. Use your favorite C++ compiler to compile Pauser.cpp and copy the resulting `Pauser.exe` to `D:\test\dist\EsoDev\`. Then compile all the C++ files in the `bin` directory and copy the resulting executables to `D:\test\dist\EsoDev\bin` (you have to manually create that directory)
 After the steps 1~4, the directory tree of the folder `D:\test\dist\EsoDev` should be like this:
 ```text
 EsoDev                                            
