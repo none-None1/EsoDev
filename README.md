@@ -57,229 +57,191 @@ To build the project, you need: PySide2, PyInstaller, and a C++ compiler.
 4. Use your favorite C++ compiler to compile Pauser.cpp and copy the resulting `Pauser.exe` to `D:\test\dist\EsoDev\`. Then compile all the C++ files in the `bin` directory and copy the resulting executables to `D:\test\dist\EsoDev\bin` (you have to manually create that directory)
 After the steps 1~4, the directory tree of the folder `D:\test\dist\EsoDev` should be like this:
 ```text
-EsoDev                                            
-├─ bin                                            
-│  ├─ brainfuck.exe                               
-│  ├─ Deadfish.exe                                
-│  ├─ RandomBrainfuck.exe                         
-│  └─ wee.exe                                     
-├─ examples                                       
-│  ├─ cat.b                                       
-│  ├─ dbfi.b                                      
-│  ├─ dice.rbf                                    
-│  ├─ e.b                                         
-│  ├─ golden.b                                    
-│  ├─ hello.b                                     
-│  ├─ hello.wee                                   
-│  ├─ hi.wee                                      
-│  ├─ infinite_loop.wee                           
-│  ├─ random_decimal.rbf                          
-│  ├─ random_letter.rbf                           
-│  ├─ testcase1.df                                
-│  ├─ testcase2.df                                
-│  └─ testcase3.df                                
-├─ extensions                                     
-│  ├─ __pycache__                                 
-│  │  └─ __init__.cpython-37.pyc                  
-│  ├─ brainfuck.py                                
-│  ├─ deadfish.py                                 
-│  ├─ list.json                                   
-│  ├─ rbf.py                                      
-│  ├─ wee.py                                      
-│  └─ __init__.py                                 
-├─ PySide2                                        
-│  ├─ plugins                                     
-│  │  ├─ bearer                                   
-│  │  │  └─ qgenericbearer.dll                    
-│  │  ├─ generic                                  
-│  │  │  └─ qtuiotouchplugin.dll                  
-│  │  ├─ iconengines                              
-│  │  │  └─ qsvgicon.dll                          
-│  │  ├─ imageformats                             
-│  │  │  ├─ qgif.dll                              
-│  │  │  ├─ qicns.dll                             
-│  │  │  ├─ qico.dll                              
-│  │  │  ├─ qjpeg.dll                             
-│  │  │  ├─ qpdf.dll                              
-│  │  │  ├─ qsvg.dll                              
-│  │  │  ├─ qtga.dll                              
-│  │  │  ├─ qtiff.dll                             
-│  │  │  ├─ qwbmp.dll                             
-│  │  │  └─ qwebp.dll                             
-│  │  ├─ platforminputcontexts                    
-│  │  │  └─ qtvirtualkeyboardplugin.dll           
-│  │  ├─ platforms                                
-│  │  │  ├─ qdirect2d.dll                         
-│  │  │  ├─ qminimal.dll                          
-│  │  │  ├─ qoffscreen.dll                        
-│  │  │  ├─ qwebgl.dll                            
-│  │  │  └─ qwindows.dll                          
-│  │  ├─ platformthemes                           
-│  │  │  └─ qxdgdesktopportal.dll                 
-│  │  └─ styles                                   
-│  │     └─ qwindowsvistastyle.dll                
-│  ├─ translations                                
-│  │  ├─ qtbase_ar.qm                             
-│  │  ├─ qtbase_bg.qm                             
-│  │  ├─ qtbase_ca.qm                             
-│  │  ├─ qtbase_cs.qm                             
-│  │  ├─ qtbase_da.qm                             
-│  │  ├─ qtbase_de.qm                             
-│  │  ├─ qtbase_en.qm                             
-│  │  ├─ qtbase_es.qm                             
-│  │  ├─ qtbase_fi.qm                             
-│  │  ├─ qtbase_fr.qm                             
-│  │  ├─ qtbase_gd.qm                             
-│  │  ├─ qtbase_he.qm                             
-│  │  ├─ qtbase_hu.qm                             
-│  │  ├─ qtbase_it.qm                             
-│  │  ├─ qtbase_ja.qm                             
-│  │  ├─ qtbase_ko.qm                             
-│  │  ├─ qtbase_lv.qm                             
-│  │  ├─ qtbase_pl.qm                             
-│  │  ├─ qtbase_ru.qm                             
-│  │  ├─ qtbase_sk.qm                             
-│  │  ├─ qtbase_tr.qm                             
-│  │  ├─ qtbase_uk.qm                             
-│  │  ├─ qtbase_zh_TW.qm                          
-│  │  ├─ qt_ar.qm                                 
-│  │  ├─ qt_bg.qm                                 
-│  │  ├─ qt_ca.qm                                 
-│  │  ├─ qt_cs.qm                                 
-│  │  ├─ qt_da.qm                                 
-│  │  ├─ qt_de.qm                                 
-│  │  ├─ qt_en.qm                                 
-│  │  ├─ qt_es.qm                                 
-│  │  ├─ qt_fa.qm                                 
-│  │  ├─ qt_fi.qm                                 
-│  │  ├─ qt_fr.qm                                 
-│  │  ├─ qt_gd.qm                                 
-│  │  ├─ qt_gl.qm                                 
-│  │  ├─ qt_he.qm                                 
-│  │  ├─ qt_help_ar.qm                            
-│  │  ├─ qt_help_bg.qm                            
-│  │  ├─ qt_help_ca.qm                            
-│  │  ├─ qt_help_cs.qm                            
-│  │  ├─ qt_help_da.qm                            
-│  │  ├─ qt_help_de.qm                            
-│  │  ├─ qt_help_en.qm                            
-│  │  ├─ qt_help_es.qm                            
-│  │  ├─ qt_help_fr.qm                            
-│  │  ├─ qt_help_gl.qm                            
-│  │  ├─ qt_help_hu.qm                            
-│  │  ├─ qt_help_it.qm                            
-│  │  ├─ qt_help_ja.qm                            
-│  │  ├─ qt_help_ko.qm                            
-│  │  ├─ qt_help_pl.qm                            
-│  │  ├─ qt_help_ru.qm                            
-│  │  ├─ qt_help_sk.qm                            
-│  │  ├─ qt_help_sl.qm                            
-│  │  ├─ qt_help_tr.qm                            
-│  │  ├─ qt_help_uk.qm                            
-│  │  ├─ qt_help_zh_CN.qm                         
-│  │  ├─ qt_help_zh_TW.qm                         
-│  │  ├─ qt_hu.qm                                 
-│  │  ├─ qt_it.qm                                 
-│  │  ├─ qt_ja.qm                                 
-│  │  ├─ qt_ko.qm                                 
-│  │  ├─ qt_lt.qm                                 
-│  │  ├─ qt_lv.qm                                 
-│  │  ├─ qt_pl.qm                                 
-│  │  ├─ qt_pt.qm                                 
-│  │  ├─ qt_ru.qm                                 
-│  │  ├─ qt_sk.qm                                 
-│  │  ├─ qt_sl.qm                                 
-│  │  ├─ qt_sv.qm                                 
-│  │  ├─ qt_tr.qm                                 
-│  │  ├─ qt_uk.qm                                 
-│  │  ├─ qt_zh_CN.qm                              
-│  │  └─ qt_zh_TW.qm                              
-│  ├─ d3dcompiler_47.dll                          
-│  ├─ libegl.dll                                  
-│  ├─ libglesv2.dll                               
-│  ├─ MSVCP140.dll                                
-│  ├─ MSVCP140_1.dll                              
-│  ├─ opengl32sw.dll                              
-│  ├─ pyside2.abi3.dll                            
-│  ├─ Qt5Core.dll                                 
-│  ├─ Qt5DBus.dll                                 
-│  ├─ Qt5Gui.dll                                  
-│  ├─ Qt5Network.dll                              
-│  ├─ Qt5Pdf.dll                                  
-│  ├─ Qt5Qml.dll                                  
-│  ├─ Qt5QmlModels.dll                            
-│  ├─ Qt5Quick.dll                                
-│  ├─ Qt5Svg.dll                                  
-│  ├─ Qt5VirtualKeyboard.dll                      
-│  ├─ Qt5WebSockets.dll                           
-│  ├─ Qt5Widgets.dll                              
-│  ├─ QtCore.pyd                                  
-│  ├─ QtGui.pyd                                   
-│  ├─ QtNetwork.pyd                               
-│  ├─ QtWidgets.pyd                               
-│  └─ VCRUNTIME140_1.dll                          
-├─ shiboken2                                      
-│  ├─ shiboken2.abi3.dll                          
-│  ├─ shiboken2.pyd                               
-│  └─ VCRUNTIME140_1.dll                          
-├─ api-ms-win-core-console-l1-1-0.dll             
-├─ api-ms-win-core-datetime-l1-1-0.dll            
-├─ api-ms-win-core-debug-l1-1-0.dll               
-├─ api-ms-win-core-errorhandling-l1-1-0.dll       
-├─ api-ms-win-core-file-l1-1-0.dll                
-├─ api-ms-win-core-file-l1-2-0.dll                
-├─ api-ms-win-core-file-l2-1-0.dll                
-├─ api-ms-win-core-handle-l1-1-0.dll              
-├─ api-ms-win-core-heap-l1-1-0.dll                
-├─ api-ms-win-core-interlocked-l1-1-0.dll         
-├─ api-ms-win-core-libraryloader-l1-1-0.dll       
-├─ api-ms-win-core-localization-l1-2-0.dll        
-├─ api-ms-win-core-memory-l1-1-0.dll              
-├─ api-ms-win-core-namedpipe-l1-1-0.dll           
-├─ api-ms-win-core-processenvironment-l1-1-0.dll  
-├─ api-ms-win-core-processthreads-l1-1-0.dll      
-├─ api-ms-win-core-processthreads-l1-1-1.dll      
-├─ api-ms-win-core-profile-l1-1-0.dll             
-├─ api-ms-win-core-rtlsupport-l1-1-0.dll          
-├─ api-ms-win-core-string-l1-1-0.dll              
-├─ api-ms-win-core-synch-l1-1-0.dll               
-├─ api-ms-win-core-synch-l1-2-0.dll               
-├─ api-ms-win-core-sysinfo-l1-1-0.dll             
-├─ api-ms-win-core-timezone-l1-1-0.dll            
-├─ api-ms-win-core-util-l1-1-0.dll                
-├─ api-ms-win-crt-conio-l1-1-0.dll                
-├─ api-ms-win-crt-convert-l1-1-0.dll              
-├─ api-ms-win-crt-environment-l1-1-0.dll          
-├─ api-ms-win-crt-filesystem-l1-1-0.dll           
-├─ api-ms-win-crt-heap-l1-1-0.dll                 
-├─ api-ms-win-crt-locale-l1-1-0.dll               
-├─ api-ms-win-crt-math-l1-1-0.dll                 
-├─ api-ms-win-crt-process-l1-1-0.dll              
-├─ api-ms-win-crt-runtime-l1-1-0.dll              
-├─ api-ms-win-crt-stdio-l1-1-0.dll                
-├─ api-ms-win-crt-string-l1-1-0.dll               
-├─ api-ms-win-crt-time-l1-1-0.dll                 
-├─ api-ms-win-crt-utility-l1-1-0.dll              
-├─ base_library.zip                               
-├─ conf.json                                      
-├─ EsoDev.exe                                     
-├─ EsoDev.png                                     
-├─ libcrypto-1_1-x64.dll                          
-├─ libssl-1_1-x64.dll                             
-├─ MSVCP140.dll                                   
-├─ Pauser.exe                                     
-├─ python3.dll                                    
-├─ python37.dll                                   
-├─ select.pyd                                     
-├─ ucrtbase.dll                                   
-├─ unicodedata.pyd                                
-├─ VCRUNTIME140.dll                               
-├─ _bz2.pyd                                       
-├─ _ctypes.pyd                                    
-├─ _hashlib.pyd                                   
-├─ _lzma.pyd                                      
-├─ _socket.pyd                                    
-└─ _ssl.pyd                                       
+EsoDev                                   
+├─ bin                                   
+│  ├─ brainfuck.exe                      
+│  ├─ Deadfish.exe                       
+│  ├─ RandomBrainfuck.exe                
+│  └─ wee.exe                            
+├─ examples                              
+│  ├─ cat.b                              
+│  ├─ dbfi.b                             
+│  ├─ dice.rbf                           
+│  ├─ e.b                                
+│  ├─ golden.b                           
+│  ├─ hello.b                            
+│  ├─ hello.wee                          
+│  ├─ hi.wee                             
+│  ├─ infinite_loop.wee                  
+│  ├─ random_decimal.rbf                 
+│  ├─ random_letter.rbf                  
+│  ├─ testcase1.df                       
+│  ├─ testcase2.df                       
+│  └─ testcase3.df                       
+├─ extensions                            
+│  ├─ __pycache__                        
+│  │  └─ __init__.cpython-37.pyc         
+│  ├─ brainfuck.py                       
+│  ├─ deadfish.py                        
+│  ├─ list.json                          
+│  ├─ rbf.py                             
+│  ├─ wee.py                             
+│  └─ __init__.py                        
+├─ PySide2                               
+│  ├─ plugins                            
+│  │  ├─ bearer                          
+│  │  │  └─ qgenericbearer.dll           
+│  │  ├─ generic                         
+│  │  │  └─ qtuiotouchplugin.dll         
+│  │  ├─ iconengines                     
+│  │  │  └─ qsvgicon.dll                 
+│  │  ├─ imageformats                    
+│  │  │  ├─ qgif.dll                     
+│  │  │  ├─ qicns.dll                    
+│  │  │  ├─ qico.dll                     
+│  │  │  ├─ qjpeg.dll                    
+│  │  │  ├─ qpdf.dll                     
+│  │  │  ├─ qsvg.dll                     
+│  │  │  ├─ qtga.dll                     
+│  │  │  ├─ qtiff.dll                    
+│  │  │  ├─ qwbmp.dll                    
+│  │  │  └─ qwebp.dll                    
+│  │  ├─ platforminputcontexts           
+│  │  │  └─ qtvirtualkeyboardplugin.dll  
+│  │  ├─ platforms                       
+│  │  │  ├─ qdirect2d.dll                
+│  │  │  ├─ qminimal.dll                 
+│  │  │  ├─ qoffscreen.dll               
+│  │  │  ├─ qwebgl.dll                   
+│  │  │  └─ qwindows.dll                 
+│  │  ├─ platformthemes                  
+│  │  │  └─ qxdgdesktopportal.dll        
+│  │  └─ styles                          
+│  │     └─ qwindowsvistastyle.dll       
+│  ├─ translations                       
+│  │  ├─ qtbase_ar.qm                    
+│  │  ├─ qtbase_bg.qm                    
+│  │  ├─ qtbase_ca.qm                    
+│  │  ├─ qtbase_cs.qm                    
+│  │  ├─ qtbase_da.qm                    
+│  │  ├─ qtbase_de.qm                    
+│  │  ├─ qtbase_en.qm                    
+│  │  ├─ qtbase_es.qm                    
+│  │  ├─ qtbase_fi.qm                    
+│  │  ├─ qtbase_fr.qm                    
+│  │  ├─ qtbase_gd.qm                    
+│  │  ├─ qtbase_he.qm                    
+│  │  ├─ qtbase_hu.qm                    
+│  │  ├─ qtbase_it.qm                    
+│  │  ├─ qtbase_ja.qm                    
+│  │  ├─ qtbase_ko.qm                    
+│  │  ├─ qtbase_lv.qm                    
+│  │  ├─ qtbase_pl.qm                    
+│  │  ├─ qtbase_ru.qm                    
+│  │  ├─ qtbase_sk.qm                    
+│  │  ├─ qtbase_tr.qm                    
+│  │  ├─ qtbase_uk.qm                    
+│  │  ├─ qtbase_zh_TW.qm                 
+│  │  ├─ qt_ar.qm                        
+│  │  ├─ qt_bg.qm                        
+│  │  ├─ qt_ca.qm                        
+│  │  ├─ qt_cs.qm                        
+│  │  ├─ qt_da.qm                        
+│  │  ├─ qt_de.qm                        
+│  │  ├─ qt_en.qm                        
+│  │  ├─ qt_es.qm                        
+│  │  ├─ qt_fa.qm                        
+│  │  ├─ qt_fi.qm                        
+│  │  ├─ qt_fr.qm                        
+│  │  ├─ qt_gd.qm                        
+│  │  ├─ qt_gl.qm                        
+│  │  ├─ qt_he.qm                        
+│  │  ├─ qt_help_ar.qm                   
+│  │  ├─ qt_help_bg.qm                   
+│  │  ├─ qt_help_ca.qm                   
+│  │  ├─ qt_help_cs.qm                   
+│  │  ├─ qt_help_da.qm                   
+│  │  ├─ qt_help_de.qm                   
+│  │  ├─ qt_help_en.qm                   
+│  │  ├─ qt_help_es.qm                   
+│  │  ├─ qt_help_fr.qm                   
+│  │  ├─ qt_help_gl.qm                   
+│  │  ├─ qt_help_hu.qm                   
+│  │  ├─ qt_help_it.qm                   
+│  │  ├─ qt_help_ja.qm                   
+│  │  ├─ qt_help_ko.qm                   
+│  │  ├─ qt_help_pl.qm                   
+│  │  ├─ qt_help_ru.qm                   
+│  │  ├─ qt_help_sk.qm                   
+│  │  ├─ qt_help_sl.qm                   
+│  │  ├─ qt_help_tr.qm                   
+│  │  ├─ qt_help_uk.qm                   
+│  │  ├─ qt_help_zh_CN.qm                
+│  │  ├─ qt_help_zh_TW.qm                
+│  │  ├─ qt_hu.qm                        
+│  │  ├─ qt_it.qm                        
+│  │  ├─ qt_ja.qm                        
+│  │  ├─ qt_ko.qm                        
+│  │  ├─ qt_lt.qm                        
+│  │  ├─ qt_lv.qm                        
+│  │  ├─ qt_pl.qm                        
+│  │  ├─ qt_pt.qm                        
+│  │  ├─ qt_ru.qm                        
+│  │  ├─ qt_sk.qm                        
+│  │  ├─ qt_sl.qm                        
+│  │  ├─ qt_sv.qm                        
+│  │  ├─ qt_tr.qm                        
+│  │  ├─ qt_uk.qm                        
+│  │  ├─ qt_zh_CN.qm                     
+│  │  └─ qt_zh_TW.qm                     
+│  ├─ d3dcompiler_47.dll                 
+│  ├─ libegl.dll                         
+│  ├─ libglesv2.dll                      
+│  ├─ MSVCP140.dll                       
+│  ├─ MSVCP140_1.dll                     
+│  ├─ opengl32sw.dll                     
+│  ├─ pyside2.abi3.dll                   
+│  ├─ Qt5Core.dll                        
+│  ├─ Qt5DBus.dll                        
+│  ├─ Qt5Gui.dll                         
+│  ├─ Qt5Network.dll                     
+│  ├─ Qt5Pdf.dll                         
+│  ├─ Qt5Qml.dll                         
+│  ├─ Qt5QmlModels.dll                   
+│  ├─ Qt5Quick.dll                       
+│  ├─ Qt5Svg.dll                         
+│  ├─ Qt5VirtualKeyboard.dll             
+│  ├─ Qt5WebSockets.dll                  
+│  ├─ Qt5Widgets.dll                     
+│  ├─ QtCore.pyd                         
+│  ├─ QtGui.pyd                          
+│  ├─ QtNetwork.pyd                      
+│  ├─ QtWidgets.pyd                      
+│  └─ VCRUNTIME140_1.dll                 
+├─ shiboken2                             
+│  ├─ shiboken2.abi3.dll                 
+│  ├─ shiboken2.pyd                      
+│  └─ VCRUNTIME140_1.dll                 
+├─ base_library.zip                      
+├─ conf.json                             
+├─ EsoDev.exe                            
+├─ EsoDev.png                            
+├─ libcrypto-1_1-x64.dll                 
+├─ libssl-1_1-x64.dll                    
+├─ MSVCP140.dll                          
+├─ Pauser.exe                            
+├─ python3.dll                           
+├─ python37.dll                          
+├─ select.pyd                            
+├─ ucrtbase.dll                          
+├─ unicodedata.pyd                       
+├─ VCRUNTIME140.dll                      
+├─ _bz2.pyd                              
+├─ _ctypes.pyd                           
+├─ _hashlib.pyd                          
+├─ _lzma.pyd                             
+├─ _socket.pyd                           
+└─ _ssl.pyd                                                                     
 ```
 5. Run EsoDev.exe in the `D:\test\dist\EsoDev\` folder, if it works correctly, then you're done!
 
