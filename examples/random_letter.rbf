@@ -1,0 +1,12 @@
+; n (cell 1) = random byte
+>?
+; d (cell 2) = 26 
+>>+++++[<+++++>-]<+
+; Go back to n
+<
+; Using the modulus algorithm in brainfuck algorithms we store n mod d in cell3
+[>->+<[>]>[<+>-]<<[<]>-]
+; Add cell 3 by 65 (the ASCII value of A)
+>>>++++++++[<++++++++>-]<+
+; Output
+.
