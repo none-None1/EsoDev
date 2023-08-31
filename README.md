@@ -24,7 +24,7 @@ Edit
 * Select all
 * Undo
 * Redo
-* 
+
 Execution
 * Run
   
