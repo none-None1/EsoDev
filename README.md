@@ -16,6 +16,7 @@ File
 * Recent files
 * Clear history
 * Exit
+* 
 Edit
 * Copy
 * Paste
@@ -23,18 +24,25 @@ Edit
 * Select all
 * Undo
 * Redo
+* 
 Execution
 * Run
+  
 Options
 * Language
 * Default language
 * Syntax highlighting
 * Reset and quit
+
 Help
 * About
 * Keyboard shortcuts
+  
 Extensions
 * Install
 * Uninstall
+
+## Bugs
+There is a bug: If you enable syntax highlighting, you can't use undo and redo. The author is probably not good enough at programming to fix it, so if you know how to fix it, you can post an issue.
 
 That is EsoDev, have fun :D
