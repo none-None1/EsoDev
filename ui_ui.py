@@ -15,7 +15,7 @@ from PySide2.QtWidgets import *
 from extensions import extensions
 from ui_about import Ui_MainWindow as mw
 from ui_keyboard_shortcuts import Ui_MainWindow as sc
-from subprocess import run, PIPE
+from subprocess import run, DEVNULL
 import html, json
 from extinstaller import install, uninstall
 
@@ -211,17 +211,16 @@ class Ui_MainWindow(object):
         if self.newfile:
             if not self.save():
                 return
-        run(
+        k=run(
             'start "'
             + extensions[self.lang]["name"]
             + '" pauser.exe bin\\'
             + extensions[self.lang]["cmd"].replace("%1", self.fn),
             shell=True,
-            stdout=PIPE,
-            stderr=PIPE,
-            stdin=PIPE,
+            stdout=DEVNULL,
+            stderr=DEVNULL,
+            stdin=DEVNULL,
         )
-
     @Slot()
     def language(self):
         self.dlg = QDialog(self.MainWindow)
